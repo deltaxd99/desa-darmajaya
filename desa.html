@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Desa Darmajaya</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0a0a23;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 30px;
+      background: #0a0a23;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo img {
+      height: 60px;
+      width: auto;
+    }
+
+    nav {
+      flex-grow: 1;
+      /* Bungkus menu dan panggil Flexbox untuk tengah horizontal */
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style-type: none;
+      display: flex;
+      gap: 35px; /* Jarak antar menu */
+    }
+
+    nav ul li a {
+      color: #ddd;
+      font-weight: 500;
+      font-size: 16px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+
+    nav ul li a.active,
+    nav ul li a:hover {
+      color: #ff9600;
+    }
+
+    .btn-explore {
+      border: 1px solid #ddd;
+      color: #ddd;
+      padding: 10px 30px;
+      font-weight: 600;
+      border-radius: 40px;
+      background: transparent;
+      cursor: pointer;
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    .btn-explore:hover {
+      background-color: #ff9600;
+      border-color: #ff9600;
+      color: white;
+    }
+
+    section {
+      max-width: 900px;
+      margin: 80px auto 60px auto;
+      padding: 0 20px;
+      display: none;
+      color: #ddd;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    /* BERANDA */
+    #beranda .hero {
+      text-align: center;
+      padding: 0 20px 50px 20px;
+    }
+
+    #beranda small {
+      font-size: 14px;
+      color: #fff;
+      opacity: 0.7;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    #beranda h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    #beranda p {
+      color: #ccc;
+      font-size: 16px;
+      max-width: 700px;
+      margin: 0 auto 30px auto;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    #beranda .btn-main {
+      background-color: #ff9600;
+      border: none;
+      color: white;
+      padding: 12px 45px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: background-color 0.3s ease;
+    }
+
+    #beranda .btn-main:hover {
+      background-color: #e57e00;
+    }
+
+    #beranda .hero-image-container {
+      margin: 40px auto 60px auto;
+      border-radius: 20px 140px 20px 20px;
+      overflow: hidden;
+      max-width: 900px;
+    }
+
+    #beranda .hero-image-container img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    #beranda .content h2 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: white;
+      text-align: center;
+    }
+
+    #beranda .content p {
+      font-size: 16px;
+      line-height: 1.6;
+      opacity: 0.85;
+      max-width: 700px;
+      margin: 0 auto 30px auto;
+      text-align: justify;
+    }
+
+    #beranda .stats {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      margin-top: 50px;
+      font-weight: 600;
+      font-size: 14px;
+      color: #bbb;
+    }
+
+    #beranda .stats div {
+      text-align: center;
+      color: #ddd;
+    }
+    #beranda .stats div h3 {
+      font-size: 1.8rem;
+      color: #ff9600;
+      margin-bottom: 6px;
+    }
+
+    /* SECTION TITLE */
+    section h2 {
+      font-weight: 700;
+      font-size: 2rem;
+      color: white;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    /* TENTANG */
+    
+#tentang .tentang-img {
+  display: block;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 15px;
+}
+
+#tentang p {
+      max-width: 700px;
+      margin: auto;
+      text-align: justify;
+      opacity: 0.9;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* LAYANAN */
+    #layanan .services {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    #layanan .service-card {
+      background-color: #13132e;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #111;
+      max-width: 280px;
+      text-align: center;
+    }
+
+    #layanan .service-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    #layanan .service-card h3 {
+      color: #ff9600;
+      margin-bottom: 10px;
+    }
+
+    #layanan .service-card p {
+      font-size: 14px;
+      opacity: 0.85;
+      margin-bottom: 12px;
+    }
+
+    #layanan .service-card a {
+      color: #ff9600;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    #layanan .service-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* BLOG */
+    #blog .blog-post {
+      background-color: #13132e;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #111;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #blog .blog-post h3 {
+      color: #ff9600;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    #blog .blog-post p {
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    /* KONTAK */
+    #kontak form {
+      max-width: 500px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    #kontak label {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    #kontak input, #kontak textarea {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      font-family: inherit;
+      font-size: 14px;
+      resize: vertical;
+    }
+
+    #kontak button {
+      background-color: #ff9600;
+      border: none;
+      padding: 12px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    #kontak button:hover {
+      background-color: #e57e00;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav ul {
+        gap: 15px;
+      }
+
+      #beranda h1 {
+        font-size: 2rem;
+      }
+
+      #beranda p,
+      
+#tentang .tentang-img {
+  display: block;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 15px;
+}
+
+#tentang p {
+        font-size: 14px;
+      }
+
+      #layanan .services {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #layanan .service-card {
+        max-width: 90%;
+        height: auto;
+      }
+
+      #blog .blog-post {
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="desa.png" alt="Logo Desa Darmajaya" />
+    </div>
+    <nav>
+      <ul class="navbar">
+        <li><a href="#beranda" class="explore" data-section="beranda">Beranda</a></li>
+        <li><a href="#tentang" data-section="tentang">Tentang</a></li>
+        <li><a href="#layanan" data-section="layanan">Layanan</a></li>
+        <li><a href="#blog" data-section="blog">Blog</a></li>
+        <li><a href="#kontak" data-section="kontak">Kontak</a></li>
+      </ul>
+    </nav>
+    <button class="btn-explore">JELAJAHI SEKARANG</button>
+  </header>
+
+  <section id="beranda" class="active">
+    <div class="hero">
+      <small>Selamat datang di</small>
+      <h1>  Desa Darmajaya</h1>
+      <p>
+        Menyelami keindahan dan pesona alam Desa Darmajaya yang memukau serta kaya akan tradisi dan budaya yang memikat.
+      </p>
+      <button class="btn-main">Jelajahi Sekarang</button>
+    </div>
+
+    <div class="hero-image-container">
+      <img src="sawah.png" alt="Pemandangan Desa" />
+    </div>
+
+    <div class="content">
+      <h2>Desa Darmajaya: Surga Alam dan Tradisi yang Menawan</h2>
+      <p>
+        Desa Darmajaya adalah sebuah desa yang terletak di dataran tinggi dengan pemandangan alam yang indah dan warisan budaya yang kaya. 
+        Kami bangga menjaga tradisi serta menawarkan berbagai kegiatan wisata yang memikat hati setiap pengunjung.
+      </p>
+
+      <div class="stats">
+        <div>
+          <h3>5</h3>
+          <p>Tempat Wisata</p>
+        </div>
+        <div>
+          <h3>92%</h3>
+          <p>Tingkat Kepuasan</p>
+        </div>
+        <div>
+          <h3>87%</h3>
+          <p>Kunjungan Kembali</p>
+        </div>
+        <div>
+          <h3>20+</h3>
+          <p>Jasa dan Produk</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tentang">
+    <h2>Tentang Desa Darmajaya</h2>
+
+  <img src="desa darmajaya.jpg" alt="Foto Desa" class="tentang-img">
+
+    <p>
+      Desa Darmajaya adalah sebuah desa yang terletak di dataran tinggi yang penuh dengan pesona alam yang menawan dan tradisi budaya yang kuat. 
+      Desa ini terkenal dengan keindahan sawah teraseringnya, budaya yang masih terjaga, serta keramahan penduduknya. Kami menyediakan berbagai wisata alam, kuliner tradisional, dan pengalaman budaya yang autentik bagi pengunjung.
+    </p>
+  </section>
+
+  <section id="layanan">
+    <h2>Layanan dan Penawaran Kami di Desa Darmajaya</h2>
+    <div class="services">
+      <div class="service-card">
+        <img src="durian.png" alt="Wisata Alam" />
+        <h3>Wisata Alam</h3>
+        <p>Eksplorasi keindahan alam Desa Darmajaya yang penuh pesona dan kedamaian.</p>
+        <a href="#">Selengkapnya...</a>
+      </div>
+      <div class="service-card">
+        <img src="bakar.png" alt="Kuliner Tradisional" />
+        <h3>Kuliner Tradisional</h3>
+        <p>Cicipi ragam masakan khas dan autentik yang menggugah selera.</p>
+        <a href="#">Selengkapnya...</a>
+      </div>
+      <div class="service-card">
+    <img src="budaya.jpg" alt="Budaya dan Tradisi" />
+        <h3>Budaya dan Tradisi</h3>
+        <p>Pelajari dan ikut serta dalam berbagai adat dan tradisi yang hidup di desa kami.</p>
+        <a href="#">Selengkapnya...</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="blog">
+    <h2>Blog Desa Darmajaya</h2>
+    <div class="blog-post">
+      <h3>Kebudayaan Lokal yang Terjaga</h3>
+      <p>Jelajahi bagaimana masyarakat Desa Darmajaya menjaga budaya dan tradisi turun-temurun dengan penuh rasa cinta.</p>
+    </div>
+    <div class="blog-post">
+      <h3>Pesona Alam yang Mengagumkan</h3>
+      <p>Panduan wisata alam terbaik di Desa Darmajaya yang wajib dikunjungi untuk para pecinta alam dan fotografi.</p>
+    </div>
+  </section>
+
+  <section id="kontak">
+    <h2>Kontak Kami</h2>
+    <form id="contactForm">
+      <label for="name">Nama:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="message">Pesan:</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <button type="submit">Kirim Pesan</button>
+    </form>
+  </section>
+
+  <script>
+    const navLinks = document.querySelectorAll('nav ul li a');
+    const sections = document.querySelectorAll('section');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = link.getAttribute('data-section');
+
+        navLinks.forEach((lnk) => lnk.classList.remove('active'));
+        link.classList.add('active');
+
+        sections.forEach(sec => {
+          sec.style.display = (sec.id === target) ? 'block' : 'none';
+          if (sec.id === target) window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+      });
+    });
+
+    // Set default visible section
+    window.onload = () => {
+      sections.forEach(sec => {
+        sec.style.display = (sec.id === 'beranda') ? 'block' : 'none';
+      });
+    };
+
+    // Tombol Jelajahi Sekarang agar menuju Beranda
+    const btnExplore = document.querySelector('.btn-explore');
+    const btnMainExplore = document.querySelector('#beranda .btn-main');
+
+    function gotoBeranda() {
+      navLinks.forEach(link => {
+        if(link.getAttribute('data-section')==='beranda') {
+          link.click();
+        }
+      });
+    }
+
+    btnExplore.addEventListener('click', gotoBeranda);
+    btnMainExplore.addEventListener('click', gotoBeranda);
+
+    // Form submission alert
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Pesan berhasil dikirim! Terima kasih telah menghubungi kami.');
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
